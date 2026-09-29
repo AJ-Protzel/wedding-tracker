@@ -1,0 +1,109 @@
+{
+  "settings": {
+    "site_title": "Maya & Sam",
+    "venue": "Fernbrook Lodge, Pine Ridge",
+    "wedding_date": "2027-06-12",
+    "ask_per_person": "150",
+    "ask_note": "Guests traveling from abroad are covered.",
+    "family_tab": "Grandma June",
+    "ceremony_musicians": "3",
+    "ceremony_standing": "6"
+  },
+  "tx_groups": [
+    {"id": 1, "name": "Fernbrook Lodge venue", "details": "The whole lodge for Friday to Sunday. The $800 damage deposit comes back after checkout, so it is listed but not counted.", "sort_order": 1},
+    {"id": 2, "name": "Photography", "details": "Eight hours of coverage plus an engagement shoot.", "sort_order": 2},
+    {"id": 3, "name": "Catering", "details": "Family-style dinner for 40, with the dessert table.", "sort_order": 3},
+    {"id": 4, "name": "Florist", "details": null, "sort_order": 4},
+    {"id": 5, "name": "String trio", "details": "Ceremony and cocktail hour.", "sort_order": 5},
+    {"id": 6, "name": "Attire", "details": null, "sort_order": 6},
+    {"id": 7, "name": "Invitations", "details": "Cards, envelopes, stamps and wax seals.", "sort_order": 7},
+    {"id": 8, "name": "Hair & makeup", "details": "Trial in March, then the morning of.", "sort_order": 8},
+    {"id": 20, "name": "Gifts", "details": null, "sort_order": 20},
+    {"id": 21, "name": "Reservations", "details": null, "sort_order": 21},
+    {"id": 22, "name": "Grandma June", "details": "What Grandma June has given toward the wedding. What she has promised but not yet given is listed under Promised and not counted.", "sort_order": 22}
+  ],
+  "transactions": [
+    {"id": 1, "status": "paid", "due_date": "2026-05-02", "date_label": "May 2", "category": "Venue", "label": "Deposit", "amount": 2500, "part_num": 1, "part_total": 2, "group_id": 1},
+    {"id": 2, "status": "due", "due_date": "2027-05-12", "date_label": "May 12", "category": "Venue", "label": "Balance", "amount": 5200, "part_num": 2, "part_total": 2, "group_id": 1},
+    {"id": 3, "status": "due", "due_date": "2027-05-12", "date_label": "May 12", "category": "Venue", "label": "Damage deposit", "amount": 800, "refundable": true, "details": "Back within a week of checkout if nothing is damaged.", "group_id": 1},
+    {"id": 4, "status": "paid", "due_date": "2026-06-18", "date_label": "Jun 18", "category": "Photography", "label": "Retainer", "amount": 900, "part_num": 1, "part_total": 2, "group_id": 2},
+    {"id": 5, "status": "due", "due_date": "2027-05-29", "date_label": "May 29", "category": "Photography", "label": "Balance", "amount": 2700, "part_num": 2, "part_total": 2, "group_id": 2},
+    {"id": 6, "status": "paid", "due_date": "2026-08-10", "date_label": "Aug 10", "category": "Catering", "label": "Deposit", "amount": 1200, "part_num": 1, "part_total": 2, "group_id": 3},
+    {"id": 7, "status": "due", "due_date": "2027-05-28", "date_label": "May 28", "category": "Catering", "label": "Final balance", "amount": 3400, "part_num": 2, "part_total": 2, "details": "Lock the head count two weeks before.", "group_id": 3},
+    {"id": 8, "status": "paid", "due_date": "2026-09-14", "date_label": "Sep 14", "category": "Florist", "label": "Florals", "amount": 1150, "group_id": 4},
+    {"id": 9, "status": "paid", "due_date": "2026-07-01", "date_label": "Jul 1", "category": "Music", "label": "Deposit", "amount": 300, "part_num": 1, "part_total": 2, "group_id": 5},
+    {"id": 10, "status": "due", "due_date": "2027-06-12", "date_label": "Jun 12", "category": "Music", "label": "Balance", "amount": 900, "part_num": 2, "part_total": 2, "details": "Paid in cash on the day.", "group_id": 5},
+    {"id": 11, "status": "paid", "due_date": "2026-07-22", "date_label": "Jul 22", "category": "Attire", "label": "Dress", "amount": 1680, "group_id": 6},
+    {"id": 12, "status": "paid", "due_date": "2026-08-30", "date_label": "Aug 30", "category": "Attire", "label": "Suit", "amount": 740, "group_id": 6},
+    {"id": 13, "status": "paid", "due_date": "2026-08-12", "date_label": "Aug 12", "category": "Invitation", "label": "Printed invitations", "amount": 212.40, "group_id": 7},
+    {"id": 14, "status": "paid", "due_date": "2026-08-15", "date_label": "Aug 15", "category": "Invitation", "label": "Envelopes", "amount": 38.25, "group_id": 7},
+    {"id": 15, "status": "paid", "due_date": "2026-08-19", "date_label": "Aug 19", "category": "Invitation", "label": "Stamps", "amount": 46.80, "group_id": 7},
+    {"id": 16, "status": "paid", "due_date": "2026-08-21", "date_label": "Aug 21", "category": "Invitation", "label": "Wax seal kit", "amount": 24.99, "group_id": 7},
+    {"id": 17, "status": "paid", "due_date": "2026-09-05", "date_label": "Sep 5", "category": "Beauty", "label": "Deposit", "amount": 150, "part_num": 1, "part_total": 2, "group_id": 8},
+    {"id": 18, "status": "due", "due_date": "2027-06-12", "date_label": "Jun 12", "category": "Beauty", "label": "Wedding morning", "amount": 620, "part_num": 2, "part_total": 2, "group_id": 8},
+    {"id": 30, "status": "received", "due_date": "2026-09-02", "date_label": "Sep 2", "category": "Gift", "label": "The Okafor family", "amount": 250, "gift_via": "withjoy", "gift_side": "Friends", "group_id": 20},
+    {"id": 31, "status": "received", "due_date": "2026-09-09", "date_label": "Sep 9", "category": "Gift", "label": "Tante Liesl", "amount": 272.50, "currency": "EUR", "amount_original": 250, "amount_note": "€250 at 1.09 USD per EUR", "gift_via": "cash", "gift_side": "Sam's family", "group_id": 20},
+    {"id": 32, "status": "received", "due_date": "2026-09-16", "date_label": "Sep 16", "category": "Gift", "label": "Priya & Dev", "amount": 100, "gift_via": "venmo", "gift_side": "Friends", "group_id": 20},
+    {"id": 40, "status": "received", "due_date": "2026-09-03", "date_label": "Sep 3", "category": "Reservation", "label": "Theo", "amount": 150, "details": "Paid by Hana", "guest_id": 7, "group_id": 21},
+    {"id": 41, "status": "received", "due_date": "2026-09-03", "date_label": "Sep 3", "category": "Reservation", "label": "Hana", "amount": 150, "guest_id": 8, "group_id": 21},
+    {"id": 42, "status": "received", "due_date": "2026-09-11", "date_label": "Sep 11", "category": "Reservation", "label": "Marcus", "amount": 150, "guest_id": 9, "group_id": 21},
+    {"id": 43, "status": "received", "due_date": "2026-09-20", "date_label": "Sep 20", "category": "Reservation", "label": "Ines", "amount": 150, "guest_id": 12, "group_id": 21},
+    {"id": 50, "status": "received", "due_date": "2026-07-04", "date_label": "Jul 4", "category": "Contribution", "label": "Grandma June", "amount": 1000, "group_id": 22}
+  ],
+  "money_promised": [
+    {"id": 1, "label": "Dress", "vendor": "Bridal shop", "amount": 1680, "date_label": "Jul 22", "is_estimate": false, "group_id": 22, "covers_group_id": null},
+    {"id": 2, "label": "Hair & makeup", "vendor": null, "amount": null, "is_estimate": false, "group_id": 22, "covers_group_id": 8},
+    {"id": 3, "label": "Honeymoon dinner", "vendor": null, "amount": 300, "is_estimate": true, "group_id": 22, "covers_group_id": null}
+  ],
+  "beds": [
+    {"id": "1.1", "cabin": "Main lodge — upstairs", "bed_type": "King", "sort_order": 1},
+    {"id": "1.2", "cabin": "Main lodge — upstairs", "bed_type": "Queen", "sort_order": 2},
+    {"id": "1.3", "cabin": "Main lodge — downstairs", "bed_type": "Bunk", "sort_order": 3},
+    {"id": "2.1", "cabin": "Cabin A", "bed_type": "King", "sort_order": 4},
+    {"id": "2.2", "cabin": "Cabin A", "bed_type": "Pull out", "sort_order": 5},
+    {"id": "3.1", "cabin": "Cabin B", "bed_type": "King", "sort_order": 6},
+    {"id": "3.2", "cabin": "Cabin B", "bed_type": "Twin", "sort_order": 7}
+  ],
+  "guests": [
+    {"id": 1, "name": "Maya", "party": 1, "is_international": false, "attending": true, "pays": false, "bed_id": "1.1", "rsvp": "yes", "is_pet": false, "eats_dinner": true},
+    {"id": 2, "name": "Sam", "party": 1, "is_international": false, "attending": true, "pays": false, "bed_id": "1.1", "rsvp": "yes", "is_pet": false, "eats_dinner": true},
+    {"id": 3, "name": "Grandma June", "party": 2, "is_international": false, "attending": true, "pays": false, "bed_id": "1.2", "rsvp": "yes", "is_pet": false, "eats_dinner": true},
+    {"id": 4, "name": "Tante Liesl", "party": 3, "is_international": true, "attending": true, "pays": false, "bed_id": "2.1", "rsvp": "yes", "is_pet": false, "eats_dinner": true},
+    {"id": 5, "name": "Onkel Rolf", "party": 3, "is_international": true, "attending": true, "pays": false, "bed_id": "2.1", "rsvp": "yes", "is_pet": false, "eats_dinner": true},
+    {"id": 6, "name": "Jonas", "party": 3, "is_international": true, "attending": true, "pays": false, "bed_id": "2.2", "rsvp": "pending", "is_pet": false, "eats_dinner": true},
+    {"id": 7, "name": "Theo", "party": 4, "is_international": false, "attending": true, "pays": true, "bed_id": "3.1", "rsvp": "yes", "is_pet": false, "eats_dinner": true},
+    {"id": 8, "name": "Hana", "party": 4, "is_international": false, "attending": true, "pays": true, "bed_id": "3.1", "rsvp": "yes", "is_pet": false, "eats_dinner": true},
+    {"id": 9, "name": "Marcus", "party": 5, "is_international": false, "attending": true, "pays": true, "bed_id": "1.3", "rsvp": "yes", "is_pet": false, "eats_dinner": true},
+    {"id": 10, "name": "Leo", "party": 5, "is_international": false, "attending": true, "pays": true, "bed_id": "1.3", "rsvp": "yes", "is_pet": false, "eats_dinner": true},
+    {"id": 11, "name": "Aisha", "party": 6, "is_international": false, "attending": true, "pays": true, "bed_id": "3.2", "rsvp": "pending", "is_pet": false, "eats_dinner": true},
+    {"id": 12, "name": "Ines", "party": 7, "is_international": false, "attending": true, "pays": true, "bed_id": null, "rsvp": "yes", "is_pet": false, "eats_dinner": true},
+    {"id": 13, "name": "Ben", "party": 7, "is_international": false, "attending": true, "pays": true, "bed_id": null, "rsvp": "pending", "is_pet": false, "eats_dinner": true},
+    {"id": 14, "name": "Clara", "party": 8, "is_international": false, "attending": false, "pays": true, "bed_id": null, "rsvp": "no", "is_pet": false, "eats_dinner": true},
+    {"id": 15, "name": "Biscuit", "party": null, "is_international": false, "attending": true, "pays": false, "bed_id": "1.2", "rsvp": "yes", "is_pet": true, "eats_dinner": false}
+  ],
+  "vendors": [
+    {"id": 1, "name": "Rowan", "role": "Day-of coordinator", "company": "Fern & Co", "headcount": 1, "eats_dinner": true, "on_site": true},
+    {"id": 2, "name": "Photographer", "role": "Photography", "company": null, "headcount": 2, "eats_dinner": true, "on_site": true},
+    {"id": 3, "name": "String trio", "role": "Ceremony and cocktails", "company": null, "headcount": 3, "eats_dinner": false, "on_site": true},
+    {"id": 4, "name": "Caterer", "role": "Dinner", "company": null, "headcount": 0, "eats_dinner": false, "on_site": true}
+  ],
+  "page_text": {
+    "timeline": "<section>\n  <div class=\"sectitle\"><h2>June</h2></div>\n  <div class=\"day\">\n    <div class=\"dayhead\"><h3>Jun 11 &middot; Friday</h3><span class=\"sub\">move-in</span></div>\n    <dl class=\"run\">\n      <dt>3:00pm</dt><dd><strong>Check-in.</strong> Nothing is set up before this.</dd>\n      <dt>Evening</dt><dd>Welcome dinner in the main lodge. S'mores at the fire pit.</dd>\n    </dl>\n  </div>\n  <div class=\"day\">\n    <div class=\"dayhead\"><h3>Jun 12 &middot; Saturday</h3><span class=\"sub\">wedding day &middot; sunset 8:51pm</span></div>\n    <dl class=\"run\">\n      <dt>9:00am</dt><dd>Hair and makeup start.</dd>\n      <dt>4:00pm</dt><dd><strong>Ceremony</strong> on the lawn by the lake.</dd>\n      <dt>4:30&ndash;6:00</dt><dd>Cocktail hour while photos are taken.</dd>\n      <dt>6:00pm</dt><dd>Dinner and toasts.</dd>\n      <dt>8:00pm</dt><dd><strong>First dance</strong>, then dancing until 11.</dd>\n    </dl>\n  </div>\n  <div class=\"day\">\n    <div class=\"dayhead\"><h3>Jun 13 &middot; Sunday</h3><span class=\"sub\">check-out</span></div>\n    <dl class=\"run\">\n      <dt>11:00am</dt><dd><strong>Checkout.</strong> Decor packed, trash out, furniture back.</dd>\n    </dl>\n  </div>\n</section>\n\n<section>\n  <div class=\"sectitle\"><h2>Events</h2></div>\n  <div class=\"tablewrap\">\n    <table>\n      <thead><tr><th>Day</th><th>Time</th><th>Event</th><th>Where</th><th>Items</th></tr></thead>\n      <tbody>\n        <tr><td class=\"mono\">Fri</td><td class=\"mono\">Evening</td><td><strong>Welcome dinner</strong></td><td>Main lodge</td><td>Tablecloths, candles, name cards.</td></tr>\n        <tr><td class=\"mono\">Sat</td><td class=\"mono\">4:00pm</td><td><strong>Ceremony</strong></td><td>Lakeside lawn</td><td>Arch, chairs, aisle flowers, speaker for the trio.</td></tr>\n        <tr><td class=\"mono\">Sat</td><td class=\"mono\">6:00pm</td><td><strong>Dinner</strong></td><td>Tent</td><td>Runners, centrepieces, string lights.</td></tr>\n      </tbody>\n    </table>\n  </div>\n</section>",
+    "notes": "<section>\n  <div class=\"sectitle\"><h2>Notes</h2></div>\n  <div class=\"kv\">\n    <div><b>Ceremony chairs: <span data-calc=\"ceremony_chairs\"></span></b> &mdash; guest count (<span data-calc=\"guests\"></span>) + <span data-calc=\"musicians\"></span> for the trio &minus; <span data-calc=\"standing\"></span> standing up front.</div>\n    <div>The lodge has 8 picnic tables seating 8 each.</div>\n  </div>\n</section>"
+  },
+  "unsorted_notes": [
+    {"id": 1, "body": "Ask the lodge whether the fire pit needs a permit in June.", "created_at": "2026-09-18T17:02:00Z"}
+  ],
+  "checklist": [
+    {"id": 1, "list": "To Plan", "sublist": null, "body": "Seating plan for the welcome dinner", "note": null, "done": false},
+    {"id": 2, "list": "To Plan", "sublist": null, "body": "Songs for the trio", "note": "Processional, recessional and three for cocktails", "done": true},
+    {"id": 3, "list": "To Buy", "sublist": "Priorities", "body": "Veil", "note": null, "done": false},
+    {"id": 4, "list": "To Buy", "sublist": "Priorities", "body": "Rings", "note": null, "done": true},
+    {"id": 5, "list": "To Buy", "sublist": null, "body": "Guest book", "note": null, "done": false},
+    {"id": 6, "list": "To Buy", "sublist": null, "body": "String lights for the tent", "note": null, "done": false},
+    {"id": 7, "list": "To Buy", "sublist": "The week before · Jun 7–11", "body": "Welcome dinner groceries", "note": null, "done": false},
+    {"id": 8, "list": "To Buy", "sublist": "The week before · Jun 7–11", "body": "Flowers for the bridal party", "note": null, "done": false},
+    {"id": 9, "list": "To Rent", "sublist": null, "body": "Tent", "note": "June averages: high 78°F, 20% chance of rain", "done": false},
+    {"id": 10, "list": "To Book", "sublist": null, "body": "Airport shuttle for the family from abroad", "note": null, "done": false}
+  ]
+}

@@ -1,0 +1,1156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Wedding Tracker</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Wedding">
+<meta name="theme-color" content="#f1f4ef" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#10150f" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#f1f4ef;
+  --card:#ffffff;
+  --ink:#151d18;
+  --ink-2:#3f4a43;
+  --ink-3:#6c7a71;
+  --line:#d5dcd4;
+  --line-2:#e6ebe4;
+  --forest:#20402e;
+  --forest-2:#2f5a41;
+  --moss:#5c7f5a;
+  --ember:#a53f24;
+  --amber:#8a6208;
+  --river:#4d6b7a;
+  --chip:#e4ebe1;
+  --shadow:0 1px 2px rgba(21,29,24,.06),0 8px 24px -16px rgba(21,29,24,.28);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#10150f;
+    --card:#171e19;
+    --ink:#e8eee7;
+    --ink-2:#b3c0b6;
+    --ink-3:#7f8d84;
+    --line:#2a352d;
+    --line-2:#212a23;
+    --forest:#9dc4a8;
+    --forest-2:#7fae8d;
+    --moss:#8fbb8b;
+    --ember:#e08a6c;
+    --amber:#d6ab4e;
+    --river:#8fb2c1;
+    --chip:#222c25;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -16px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#10150f;
+  --card:#171e19;
+  --ink:#e8eee7;
+  --ink-2:#b3c0b6;
+  --ink-3:#7f8d84;
+  --line:#2a352d;
+  --line-2:#212a23;
+  --forest:#9dc4a8;
+  --forest-2:#7fae8d;
+  --moss:#8fbb8b;
+  --ember:#e08a6c;
+  --amber:#d6ab4e;
+  --river:#8fb2c1;
+  --chip:#222c25;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -16px rgba(0,0,0,.8);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:Karla,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px 80px}
+
+h1,h2,h3{font-family:Fraunces,Georgia,serif;text-wrap:balance;margin:0;font-weight:600}
+h1{font-size:clamp(2.1rem,7vw,3.6rem);line-height:1.02;letter-spacing:-.02em}
+h2{font-size:clamp(1.4rem,4vw,2rem);line-height:1.15;letter-spacing:-.01em}
+h3{font-size:1.08rem;line-height:1.3}
+p{margin:0}
+a{color:var(--forest-2)}
+:focus-visible{outline:2px solid var(--forest-2);outline-offset:2px}
+
+.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums}
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:500;
+}
+
+/* ---------- masthead ---------- */
+.masthead{padding:40px 0 10px}
+
+/* ---------- tabs ---------- */
+.tabs{
+  position:sticky;top:0;z-index:5;display:flex;
+  background:var(--paper);border-bottom:1px solid var(--line);
+}
+.tab{
+  flex:1 1 0;min-width:0;text-align:center;
+  font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+  color:var(--ink-3);background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;
+  padding:14px 4px 11px;cursor:pointer;white-space:nowrap;
+}
+@media (max-width:380px){.tab{font-size:.66rem;letter-spacing:.06em}}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--forest);border-bottom-color:var(--forest)}
+.panel > section:first-child{margin-top:28px;border-top:none;padding-top:0}
+.titlerow{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:6px}
+.titlerow h1{flex:1 1 auto}
+.rbox{display:flex;flex-direction:column;align-items:flex-end;gap:4px;padding-bottom:6px}
+.stamp{font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+
+.errbar{
+  margin-top:16px;padding:12px 15px;border:1px solid var(--line);border-left:3px solid var(--ember);
+  border-radius:3px;background:var(--card);font-size:.9rem;color:var(--ink-2);
+}
+.errbar b{color:var(--ink)}
+
+.skel{
+  border:1px dashed var(--line);border-radius:3px;padding:20px;
+  color:var(--ink-3);font-family:"IBM Plex Mono",monospace;font-size:.72rem;
+  letter-spacing:.1em;text-transform:uppercase;text-align:center;
+}
+
+/* ---------- sections ---------- */
+section{padding-top:44px;margin-top:44px;border-top:2px solid var(--forest)}
+section:first-of-type{margin-top:34px}
+#notes section:first-of-type{margin-top:44px}
+.sectitle{margin-bottom:16px}
+.day{margin-bottom:26px}
+.dayhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding-bottom:7px;margin-bottom:12px;border-bottom:1px solid var(--line)}
+.dayhead h3{font-family:Fraunces,Georgia,serif;font-size:1.18rem;color:var(--forest)}
+.dayhead .sub{font-family:"IBM Plex Mono",monospace;font-size:.7rem;color:var(--ink-3);letter-spacing:.06em}
+.run{display:grid;grid-template-columns:76px 1fr;gap:6px 16px;font-size:.94rem}
+.run dt{font-family:"IBM Plex Mono",monospace;font-size:.76rem;color:var(--ink-3);padding-top:2px;font-variant-numeric:tabular-nums}
+.run dd{margin:0;color:var(--ink-2)}
+.run dd strong{color:var(--ink)}
+.kv{display:flex;flex-direction:column;gap:7px;font-size:.93rem;color:var(--ink-2)}
+.kv b{color:var(--ink)}
+
+/* ---------- number tiles ---------- */
+.tiles{
+  display:grid;border:1px solid var(--line);border-radius:3px;background:var(--card);
+  overflow:hidden;box-shadow:var(--shadow);
+}
+.tiles.two{grid-template-columns:repeat(2,1fr);max-width:520px}
+.tiles.three{grid-template-columns:repeat(3,1fr)}
+.fact{padding:14px 16px;display:flex;flex-direction:column;gap:2px;border-right:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+.fact .v{font-family:Fraunces,Georgia,serif;font-size:1.35rem;line-height:1.1;font-variant-numeric:tabular-nums}
+.fact .v.warn{color:var(--ember)}
+.fact .v.good{color:var(--moss)}
+.fact .k{font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3)}
+.tiles.two .fact:nth-child(2n){border-right:none}
+.tiles.two .fact:last-child{border-bottom:none}
+.tiles.two .fact.wide{grid-column:1/-1;border-right:none;align-items:center;text-align:center}
+.tiles.three .fact{border-bottom:none}
+.tiles.three .fact.wide{grid-column:1/-1;border-right:none;border-top:1px solid var(--line-2);align-items:center;text-align:center}
+.tiles.three .fact:last-child{border-right:none}
+@media (max-width:420px){
+  .tiles.three .fact{padding:12px 11px}
+  .tiles.three .fact .v{font-size:1.15rem}
+}
+
+.summary{margin-top:16px;max-width:70ch;color:var(--ink-2);font-size:.95rem}
+.summary b{color:var(--ink)}
+.party{white-space:nowrap}
+
+/* ---------- lodging ---------- */
+.cabins{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;align-items:start;margin-top:18px}
+.cabin{background:var(--card);border:1px solid var(--line);border-radius:3px;box-shadow:var(--shadow);overflow:hidden}
+.cabin > header{
+  display:flex;align-items:baseline;justify-content:space-between;gap:10px;
+  padding:12px 15px;border-bottom:1px solid var(--line);background:var(--chip);
+}
+.cabin > header h3{font-size:.98rem;color:var(--forest)}
+.cabin > header .cap{font-family:"IBM Plex Mono",monospace;font-size:.7rem;color:var(--ink-3);white-space:nowrap}
+.floor{font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);padding:9px 15px 3px}
+.bed{display:grid;grid-template-columns:44px 1fr auto;gap:3px 10px;align-items:baseline;padding:9px 15px;border-top:1px solid var(--line-2)}
+.bed:first-child{border-top:none}
+.bed .id{font-family:"IBM Plex Mono",monospace;font-size:.7rem;color:var(--ink-3)}
+.bed .who{font-size:.91rem;color:var(--ink)}
+.bed .who .type{display:block;font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.bed.free .who{color:var(--ink-3);font-style:italic}
+
+.vendorlist{margin-top:22px;border:1px solid var(--line);border-radius:3px;background:var(--card);box-shadow:var(--shadow);overflow:hidden}
+.vrow{display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding:10px 15px;border-top:1px solid var(--line-2)}
+.vrow:first-child{border-top:none}
+.vrow .vn{font-size:.92rem;font-weight:700}
+.vrow .vr{font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3)}
+.vrow .vm{font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--moss);white-space:nowrap}
+
+/* ---------- name chips ---------- */
+.people{display:flex;flex-wrap:wrap;gap:9px 15px;margin:6px 0 22px}
+.pgroup{display:flex;align-items:center}
+.tie{width:14px;height:1px;background:var(--ink-3);flex:none}
+.chip{
+  display:inline-block;padding:5px 11px;border-radius:2px;background:var(--chip);
+  border:1px solid var(--line-2);font-size:.87rem;color:var(--ink-2);white-space:nowrap;
+}
+/* one step per thing settled: bed, then RSVP, then payment */
+.chip.s1{
+  border-color:var(--moss);color:var(--moss);
+  background:color-mix(in srgb,var(--moss) 12%,transparent);
+}
+.chip.s2{
+  border-color:var(--forest-2);color:var(--forest-2);font-weight:700;
+  background:color-mix(in srgb,var(--forest-2) 28%,transparent);
+}
+.chip.s3{
+  border-color:var(--amber);color:var(--amber);font-weight:700;
+  background:color-mix(in srgb,var(--amber) 26%,transparent);
+}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:2px}
+.legend span{font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3)}
+.legend .dot{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:5px;vertical-align:middle}
+.legend .dot.n{background:var(--line)}
+.legend .dot.s1{background:color-mix(in srgb,var(--moss) 60%,transparent);box-shadow:inset 0 0 0 1px var(--moss)}
+.legend .dot.s2{background:var(--forest-2)}
+.legend .dot.s3{background:var(--amber)}
+
+/* ---------- pills ---------- */
+.pill{
+  display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.1em;
+  text-transform:uppercase;padding:2px 6px;border-radius:2px;border:1px solid currentColor;font-weight:600;
+  white-space:nowrap;
+}
+.pill.due{color:var(--ember)}
+.pill.soon{color:var(--amber)}
+.pill.ok{color:var(--moss)}
+.pill.late{color:var(--ember);background:color-mix(in srgb,var(--ember) 14%,transparent)}
+.pill.quiet{color:var(--ink-3)}
+.pill.paid{color:var(--amber);border-color:color-mix(in srgb,var(--amber) 50%,transparent);background:color-mix(in srgb,var(--amber) 14%,transparent)}
+
+/* ---------- checklist ---------- */
+.filters{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
+button.chipbtn{
+  font-family:"IBM Plex Mono",monospace;font-size:.65rem;letter-spacing:.11em;text-transform:uppercase;
+  padding:6px 11px;border-radius:2px;border:1px solid var(--line);background:var(--card);
+  color:var(--ink-2);cursor:pointer;font-weight:600;
+}
+button.chipbtn[aria-pressed="true"]{background:var(--forest);border-color:var(--forest);color:var(--paper)}
+.tx{border:1px solid var(--line);border-radius:3px;background:var(--card);box-shadow:var(--shadow);overflow:hidden}
+.grp{border-top:1px solid var(--line-2)}
+.grp:first-child{border-top:none}
+.grp > summary{list-style:none;cursor:pointer}
+.grp > summary::-webkit-details-marker{display:none}
+.ghead{display:grid;grid-template-columns:16px 1fr auto;gap:2px 10px;align-items:start;padding:12px 15px}
+.caret{width:16px;height:22px;display:flex;align-items:center;justify-content:center;color:var(--ink-3)}
+.caret::before{content:"";border-left:6px solid currentColor;border-top:5px solid transparent;border-bottom:5px solid transparent;transition:transform .15s}
+details[open] > summary .caret::before{transform:rotate(90deg)}
+.gname{font-size:.97rem;font-weight:700;line-height:1.35}
+.gmeta{display:block;font-family:"IBM Plex Mono",monospace;font-size:.64rem;letter-spacing:.06em;color:var(--ink-3);margin-top:2px}
+.gmeta.late{color:var(--ember);font-weight:600}
+.gright{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.gamt{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-weight:700;font-size:.93rem;white-space:nowrap}
+.gbody{padding:0 15px 14px 41px}
+.gdetails{font-size:.89rem;color:var(--ink-2);margin-bottom:10px;max-width:62ch}
+.lines{list-style:none;margin:0;padding:0 0 0 12px;border-left:2px solid var(--line)}
+.line{display:grid;grid-template-columns:1fr auto;gap:1px 10px;align-items:baseline;padding:7px 0;border-top:1px solid var(--line-2)}
+.line:first-child{border-top:none}
+.lname{font-size:.9rem;color:var(--ink)}
+.part{font-family:"IBM Plex Mono",monospace;font-size:.68rem;font-weight:600;color:var(--ink-3)}
+.lright{display:flex;align-items:baseline;gap:7px}
+.lamt{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-size:.86rem;white-space:nowrap}
+.lsub{grid-column:1 / -1;font-size:.8rem;color:var(--ink-3)}
+.lsub.late{color:var(--ember)}
+
+/* ---------- static tables ---------- */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:3px;background:var(--card);box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:.9rem}
+th,td{padding:11px 15px;text-align:left;border-bottom:1px solid var(--line-2);vertical-align:top}
+thead th{
+  font-family:"IBM Plex Mono",monospace;font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:500;background:var(--chip);border-bottom:1px solid var(--line);
+}
+tbody tr:last-child td{border-bottom:none}
+
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--ink-3);font-size:.82rem;display:flex;flex-direction:column;gap:6px}
+
+@media (max-width:620px){
+  .wrap{padding:0 16px 64px}
+  .run{grid-template-columns:1fr;gap:2px}
+  .run dt{padding-top:8px}
+  .cabins{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+[hidden]{display:none!important}
+body{padding-top:env(safe-area-inset-top)}
+.panel > div > section:first-child{margin-top:28px;border-top:none;padding-top:0}
+
+/* ---------- sign-in ---------- */
+/* ---------- unsorted notes ---------- */
+.noteform{display:flex;gap:6px;margin-bottom:14px}
+.noteform input{flex:1;min-width:0;font-family:Karla,-apple-system,sans-serif;font-size:16px;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:3px;padding:11px 12px}
+.noteform input:focus{outline:2px solid var(--forest-2);outline-offset:1px;border-color:var(--forest-2)}
+.noteform button{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;font-weight:600;color:var(--paper);background:var(--forest);border:1px solid var(--forest);border-radius:3px;padding:0 14px;cursor:pointer;flex:none}
+.noteform button[disabled]{opacity:.55;cursor:default}
+.notemsg{font-size:.86rem;color:var(--ember);margin:-8px 0 12px}
+
+.signin{max-width:380px;margin:12vh auto 0;padding:0 20px 60px}
+.signin h1{margin:8px 0 26px}
+.signin form{display:flex;flex-direction:column;gap:14px}
+.signin label{display:flex;flex-direction:column;gap:6px;font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3)}
+.signin input{font-family:Karla,-apple-system,sans-serif;font-size:16px;letter-spacing:normal;text-transform:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:3px;padding:12px 13px}
+.signin input:focus{outline:2px solid var(--forest-2);outline-offset:1px;border-color:var(--forest-2)}
+.signin button{font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.13em;text-transform:uppercase;font-weight:600;color:var(--paper);background:var(--forest);border:1px solid var(--forest);border-radius:3px;padding:13px;cursor:pointer;margin-top:4px}
+.signin button[disabled]{opacity:.55;cursor:default}
+.signin .msg{font-size:.88rem;color:var(--ember);min-height:1.4em;margin:0}
+.signin .hint{font-size:.84rem;color:var(--ink-3);margin:0}
+/* ---------- checklists ---------- */
+.chklist{display:flex;flex-direction:column}
+.chk{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start;padding:8px 0;border-top:1px solid var(--line-2);font-size:.93rem;color:var(--ink-2);cursor:pointer}
+.chk:first-child{border-top:none}
+.chk input{width:18px;height:18px;margin:3px 0 0;accent-color:var(--forest-2);cursor:pointer}
+.chk .cn{display:block;font-size:.8rem;color:var(--ink-3);margin-top:2px}
+.chk.done .cb{text-decoration:line-through;color:var(--ink-3)}
+.tbadge{display:inline-block;min-width:17px;margin-left:5px;padding:0 5px;border-radius:9px;background:var(--ember);color:var(--paper);font-size:.6rem;line-height:17px;letter-spacing:0;vertical-align:1px}
+button.linkish{font:inherit;color:var(--forest-2);background:none;border:none;padding:0;cursor:pointer;text-decoration:underline}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<div id="signin" class="signin" hidden>
+  <p class="eyebrow">Private</p>
+  <h1 class="sitetitle">Wedding Tracker</h1>
+  <form id="signinForm">
+    <label>Email<input id="email" type="email" autocomplete="username" autocapitalize="off" required></label>
+    <label>Password<input id="password" type="password" autocomplete="current-password" required></label>
+    <button id="signinBtn" type="submit">Sign in</button>
+    <p class="msg" id="signinMsg"></p>
+    <p class="hint">You stay signed in on this device until you sign out.</p>
+  </form>
+</div>
+
+<div id="app" class="wrap" hidden>
+
+<header class="masthead">
+  <p class="eyebrow" id="eyebrow">&nbsp;</p>
+  <div class="titlerow">
+    <h1 class="sitetitle">Wedding Tracker</h1>
+    <div class="rbox">
+      <span class="stamp" id="stamp">reading&hellip;</span>
+    </div>
+  </div>
+  <div id="err" hidden class="errbar"></div>
+  <div id="demobar" hidden class="errbar" style="border-left-color:var(--amber)"><b>Demo.</b> Everything here is made up, and ticks and notes are not saved. Set <code>SUPABASE_URL</code> and <code>SUPABASE_KEY</code> to use your own data.</div>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button class="tab" role="tab" data-tab="costs" aria-selected="true">Costs</button>
+  <button class="tab" role="tab" data-tab="guests" aria-selected="false">Guests</button>
+  <button class="tab" role="tab" data-tab="timeline" aria-selected="false">Timeline</button>
+  <button class="tab" role="tab" data-tab="notes" aria-selected="false">Notes<span class="tbadge" id="notesBadge" hidden></span></button>
+</nav>
+
+<div class="panel" data-tab="costs">
+<section>
+  <div class="sectitle"><h2>The Numbers</h2></div>
+  <div id="numbers"><div class="skel">Loading</div></div>
+</section>
+<section>
+  <div class="sectitle"><h2>Money Out</h2></div>
+  <div id="checklist"><div class="skel">Loading</div></div>
+</section>
+<section>
+  <div class="sectitle"><h2>Money In</h2></div>
+  <div id="moneyin"><div class="skel">Loading</div></div>
+</section>
+<section>
+  <div class="sectitle"><h2 id="familyTitle">Family Tab</h2></div>
+  <div id="family"><div class="skel">Loading</div></div>
+</section>
+</div>
+
+<div class="panel" data-tab="guests" hidden>
+<section>
+  <div class="sectitle"><h2>Lodging</h2></div>
+  <div id="lodging"><div class="skel">Loading</div></div>
+</section>
+</div>
+
+<div class="panel" data-tab="timeline" hidden>
+  <div id="timeline"><div class="skel" style="margin-top:28px">Loading</div></div>
+</div>
+
+<div class="panel" data-tab="notes" hidden>
+  <section>
+    <div class="sectitle"><h2>Unsorted Notes</h2></div>
+    <form id="noteForm" class="noteform">
+      <input id="noteInput" type="text" maxlength="1000" placeholder="Add a note" autocomplete="off" enterkeyhint="send" required>
+      <button id="noteBtn">Add</button>
+    </form>
+    <p class="notemsg" id="noteMsg" hidden></p>
+    <div class="kv" id="unsorted"></div>
+  </section>
+  <div id="notes"><div class="skel" style="margin-top:28px">Loading</div></div>
+  <div id="checklists"></div>
+  <p class="summary" id="badgeRow" hidden><button class="linkish" id="badgeBtn">Show the open count on the app icon</button></p>
+</div>
+
+<footer>
+  <div>Notes and checklist ticks can be added here. Everything else is edited in the database.</div>
+  <div><button class="linkish" id="signout">Sign out</button></div>
+</footer>
+
+</div>
+
+<script>
+/* Your Supabase project. Left empty, the page runs as a demo on demo-data.json.
+   The publishable key is public by design: the database answers only signed-in users. */
+const SUPABASE_URL = "";
+const SUPABASE_KEY = "";
+const DEMO = !SUPABASE_URL || !SUPABASE_KEY;
+
+/* Money is shown in this currency; a gift in any other currency shows its own amount above it. */
+const HOME_CURRENCY = "USD";
+
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));
+const cur2 = new Intl.NumberFormat("en-US", {style:"currency", currency:HOME_CURRENCY});
+const cur0 = new Intl.NumberFormat("en-US", {style:"currency", currency:HOME_CURRENCY, maximumFractionDigits:0, minimumFractionDigits:0});
+const money = (n) => n == null ? "—" : cur2.format(Number(n));
+const moneySigned = (n) => (Number(n) < 0 ? "−" : "+") + money(Math.abs(Number(n)));
+const money0 = (n) => n == null ? "—" : cur0.format(Math.round(Number(n)));
+/* a foreign amount in its own currency, e.g. "IDR 10,000,000" or "€250.00" */
+const foreign = (n, code) => { try { return new Intl.NumberFormat("en-US", {style:"currency", currency:code, currencyDisplay:"narrowSymbol"}).format(Number(n)); } catch (e) { return Number(n).toLocaleString("en-US") + " " + code; } };
+
+/* one box per name, parties tied together with a short line */
+function nameChips(list, step){
+  const byParty = new Map();
+  for (const g of list) {
+    const k = g.party == null ? "solo" + g.id : g.party;
+    if (!byParty.has(k)) byParty.set(k, []);
+    byParty.get(k).push(g);
+  }
+  return '<div class="people">' + [...byParty.values()].map(members =>
+    '<div class="pgroup">' + members
+      .map(g => { const s = step(g); return '<span class="chip' + (s ? " s" + s : "") + '">' + esc(g.name) + '</span>'; })
+      .join('<span class="tie"></span>') + '</div>'
+  ).join("") + '</div>';
+}
+
+/* live numbers inside Timeline and Notes HTML: <span data-calc="guests"></span> */
+function fillCalcs(d){
+  const s = d.settings || {};
+  const guests = (d.lodging_summary || {}).guests_attending || 0;
+  const musicians = Number(s.ceremony_musicians || 0);
+  const standing = Number(s.ceremony_standing || 0);
+  const calc = { guests, musicians, standing, ceremony_chairs: guests + musicians - standing };
+  document.querySelectorAll("#timeline [data-calc], #notes [data-calc]").forEach(el => {
+    const v = calc[el.dataset.calc];
+    el.textContent = v == null ? "?" : v;
+  });
+}
+
+/* notes anyone signed in can add; they land in unsorted_notes and are filed later */
+let unsortedNotes = [];
+function renderUnsorted(){
+  $("unsorted").innerHTML = unsortedNotes.length
+    ? unsortedNotes.map(n => '<div>' + esc(n.body) +
+        '<span class="gmeta">' + new Date(n.created_at).toLocaleDateString("en-US", {month:"short", day:"numeric"}) + '</span></div>').join("")
+    : '';
+}
+
+/* To Plan / To Buy / To Rent / To Book: checklist_items, ticked through set_checklist_item() */
+let checklist = [];
+function renderChecklists(){
+  const lists = [];
+  for (const c of checklist) {
+    let l = lists.find(x => x.name === c.list);
+    if (!l) { l = {name: c.list, groups: []}; lists.push(l); }
+    let g = l.groups[l.groups.length - 1];
+    if (!g || g.sublist !== c.sublist) { g = {sublist: c.sublist, items: []}; l.groups.push(g); }
+    g.items.push(c);
+  }
+  const item = (c) =>
+    '<label class="chk' + (c.done ? " done" : "") + '"><input type="checkbox" data-id="' + c.id + '"' + (c.done ? " checked" : "") + '>' +
+    '<span><span class="cb">' + esc(c.body) + '</span>' + (c.note ? '<span class="cn">' + esc(c.note) + '</span>' : "") + '</span></label>';
+  $("checklists").innerHTML = lists.map((l, i) => {
+    const open = l.groups.flatMap(g => g.items).filter(c => !c.done).length;
+    return '<section' + (i === 0 ? ' style="margin-top:44px;padding-top:44px;border-top:2px solid var(--forest)"' : "") + '>' +
+      '<div class="sectitle" style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">' +
+        '<h2>' + esc(l.name) + '</h2><span class="stamp">' + (open ? open + " left" : "all done") + '</span></div>' +
+      l.groups.map((g, j) => {
+        /* "Heading · sub" becomes a day-style heading; an untitled group after a titled one is "Everything else" */
+        const title = g.sublist || (j > 0 ? "Everything else" : "");
+        const [h, sub] = title.split(" · ");
+        return (title ? '<div class="dayhead"' + (j > 0 ? ' style="margin-top:22px"' : "") + '><h3>' + esc(h) + '</h3>' +
+                  (sub ? '<span class="sub">' + esc(sub) + '</span>' : "") + '</div>' : "") +
+          '<div class="chklist">' + g.items.map(item).join("") + '</div>';
+      }).join("") +
+    '</section>';
+  }).join("");
+
+  $("checklists").querySelectorAll("input[type=checkbox]").forEach(box =>
+    box.addEventListener("change", async () => {
+      const c = checklist.find(x => x.id === Number(box.dataset.id));
+      const want = box.checked;
+      c.done = want;
+      renderChecklists();
+      updateBadge();
+      const {error} = await call("set_checklist_item", {item_id: c.id, is_done: want});
+      if (error) { c.done = !want; renderChecklists(); updateBadge(); alert("Could not save that tick. Try again."); }
+    }));
+}
+
+/* the badge counts what is still open: unticked checklist items plus unsorted notes */
+function openCount(){ return checklist.filter(c => !c.done).length + unsortedNotes.length; }
+function updateBadge(){
+  const n = openCount();
+  const b = $("notesBadge");
+  b.textContent = n;
+  b.hidden = n === 0;
+  if ("setAppBadge" in navigator) {
+    (n ? navigator.setAppBadge(n) : navigator.clearAppBadge()).catch(() => {});
+    /* iPhone home-screen apps only show a badge once notifications are allowed */
+    $("badgeRow").hidden = !("Notification" in window) || Notification.permission !== "default";
+  }
+}
+$("badgeBtn").addEventListener("click", async () => {
+  try { await Notification.requestPermission(); } catch (e) {}
+  updateBadge();
+});
+
+function renderNumbers(d){
+  const m = d.money || {};
+  const s = d.settings || {};
+  const ask = Number(s.ask_per_person || 0);
+  const gifts = Number(m.received || 0);
+
+  const tile = (k, v, cls, wide) => '<div class="fact' + (wide ? " wide" : "") + '"><span class="v ' + (cls || "") + '">' + v + '</span><span class="k">' + k + '</span></div>';
+
+  $("numbers").innerHTML =
+    '<div class="tiles two">' +
+      tile("Paid", money(m.paid)) +
+      tile("Due", money(m.due), "warn") +
+      tile("Committed", money(m.committed)) +
+      tile("Money in", "+" + money(gifts), "good") +
+      tile("Account change", moneySigned(gifts - Number(m.committed || 0)), "", true) +
+    '</div>' +
+    '<p class="summary">' + money0(ask) + ' per person.' + (s.ask_note ? " " + esc(s.ask_note) : "") + '</p>';
+}
+
+function renderLodging(d){
+  const beds = d.lodging || [];
+  const sum = d.lodging_summary || {};
+  const vendors = (d.vendors || []).filter(v => v.on_site);
+
+  const attending = (d.guests || []).filter(g => g.attending && !g.is_pet);
+  const intl = attending.filter(g => g.is_international);
+  /* a guest counts as paid once a received transaction points at them */
+  const paidBy = new Map();
+  for (const t of (d.transactions || [])) if (t.status === "received" && t.guest_id) paidBy.set(t.guest_id, Number(t.amount || 0));
+  const isPaid = (g) => g.pays && paidBy.has(g.id);
+  const paid = attending.filter(isPaid);
+  const paidTotal = paid.reduce((sum, g) => sum + paidBy.get(g.id), 0);
+  const ask = Number((d.settings || {}).ask_per_person || 0);
+  /* grey, then a bed, then an RSVP, then paid */
+  const step = (g) => isPaid(g) ? 3 : g.rsvp === "yes" ? 2 : g.bed_id ? 1 : 0;
+  /* a bed reads paid once everyone in it who owes the ask has paid */
+  const bedPaid = (b) => {
+    const payers = attending.filter(g => g.bed_id === b.id && g.pays);
+    return payers.length > 0 && payers.every(isPaid);
+  };
+
+  const groups = [];
+  for (const b of beds) {
+    const parts = String(b.cabin).split(" — ");
+    const house = parts[0];
+    const floor = parts.slice(1).join(" — ");
+    let g = groups.find(x => x.house === house);
+    if (!g) { g = {house, floors: []}; groups.push(g); }
+    let f = g.floors.find(x => x.name === floor);
+    if (!f) { f = {name: floor, beds: []}; g.floors.push(f); }
+    f.beds.push(b);
+  }
+
+  const tile = (k, v, cls, wide) => '<div class="fact' + (wide ? " wide" : "") + '"><span class="v ' + (cls || "") + '">' + v + '</span><span class="k">' + k + '</span></div>';
+
+  const cards = groups.map(g => {
+    const all = g.floors.flatMap(f => f.beds);
+    const used = all.filter(b => b.bodies > 0).length;
+    const rows = g.floors.map(f =>
+      (f.name ? '<div class="floor">' + esc(f.name) + '</div>' : '') +
+      f.beds.map(b => {
+        const taken = b.bodies > 0;
+        return '<div class="bed ' + (taken ? "taken" : "free") + '">' +
+                 '<span class="id">' + esc(b.id) + '</span>' +
+                 '<span class="who">' + (taken ? esc(b.names) : "free") + '<span class="type">' + esc(b.bed_type) + '</span></span>' +
+                 '<span>' + (!taken ? '<span class="pill ok">free</span>'
+                   : bedPaid(b) ? '<span class="pill paid">paid</span>'
+                   : '<span class="pill quiet">full</span>') + '</span>' +
+               '</div>';
+      }).join("")
+    ).join("");
+    return '<article class="cabin"><header><h3>' + esc(g.house) + '</h3>' +
+           '<span class="cap">' + used + " / " + all.length + ' beds</span></header>' +
+           '<div>' + rows + '</div></article>';
+  }).join("");
+
+  $("lodging").innerHTML =
+    '<div class="tiles two">' +
+      tile("Guests", sum.guests_attending || 0) +
+      tile("Dinner count", sum.dinner_count || 0) +
+      tile("RSVPed", (sum.rsvped || 0) + " / " + (sum.guests_attending || 0), (sum.rsvped ? "" : "warn")) +
+      tile("Paid", paid.length + " / " + (sum.payers || 0), (paid.length ? "" : "warn")) +
+      tile("Collected · of " + money0(attending.filter(g => g.pays && g.rsvp === "yes").length * ask) + " RSVPed", money0(paidTotal), (paidTotal ? "good" : "warn"), true) +
+    '</div>' +
+    '<div class="legend" style="margin-top:18px">' +
+      '<span><i class="dot n"></i>no bed yet</span>' +
+      '<span><i class="dot s1"></i>has a bed</span>' +
+      '<span><i class="dot s2"></i>RSVPed</span>' +
+      '<span><i class="dot s3"></i>paid</span>' +
+    '</div>' +
+    nameChips(attending, step) +
+    '<div class="cabins">' + cards + '</div>' +
+    (paid.length
+      ? '<p class="eyebrow" style="margin-top:24px;margin-bottom:6px">Paid</p>' +
+        '<p class="summary" style="margin-top:0">' + paid.map(g => esc(g.name)).join(" · ") + '</p>'
+      : "") +
+    (intl.length
+      ? '<p class="eyebrow" style="margin-top:24px;margin-bottom:6px">Internationals</p>' +
+        '<p class="summary" style="margin-top:0">' + intl.map(g => esc(g.name)).join(" · ") + '</p>'
+      : "") +
+    (vendors.length
+      ? '<p class="eyebrow" style="margin-top:24px;margin-bottom:8px">Vendors on site</p>' +
+        '<div class="vendorlist">' + vendors.map(v =>
+          '<div class="vrow"><div><span class="vn">' + esc(v.name) + '</span>' +
+          '<span class="vr" style="display:block">' + esc(v.role) + (v.company ? " · " + esc(v.company) : "") + '</span></div>' +
+          '<span class="vm">' + (v.eats_dinner ? (v.headcount > 1 ? v.headcount + " plates" : "1 plate") : "no plate") + '</span></div>'
+        ).join("") + '</div>'
+      : "");
+}
+
+/* Money In: received transactions count toward Money in; money_promised rows are shown but never counted */
+let inPage = "all";
+let inData = {received: [], promised: []};
+const openIn = new Set();
+
+function renderMoneyIn(d){
+  const received = (d.transactions || []).filter(t => t.status === "received");
+  const promised = d.money_promised || [];
+  inData = {received, promised};
+  const got = received.reduce((s, t) => s + Number(t.amount || 0), 0);
+  const left = promisedLeft(promised, received);
+  const est = promised.filter(r => r.is_estimate).reduce((s, r) => s + Number(r.amount || 0), 0);
+  const count = {
+    all: received.length + promised.length,
+    gifts: received.filter(t => t.category === "Gift").length,
+    payments: received.filter(t => t.category !== "Gift").length,
+    promised: promised.length
+  };
+  const btn = (key, label) => '<button class="chipbtn" data-f="' + key + '" aria-pressed="' + (inPage === key) + '">' + label + " · " + count[key] + '</button>';
+  const tile = (k, v, cls) => '<div class="fact"><span class="v ' + (cls || "") + '">' + v + '</span><span class="k">' + k + '</span></div>';
+
+  $("moneyin").innerHTML =
+    '<div class="tiles two" style="max-width:none">' +
+      tile("Received", "+" + money(got), "good") +
+      tile("Promised · not counted", money(left)) +
+    '</div>' +
+    (est ? '<p class="summary">Estimates (' + money(est) + ') are listed under Promised but never counted.</p>' : "") +
+    '<div class="filters" style="margin-top:18px">' +
+      btn("all", "All") + btn("gifts", "Gifts") + btn("payments", "Payments") + btn("promised", "Promised") +
+    '</div>' +
+    '<div id="inlist"></div>';
+
+  $("moneyin").querySelectorAll(".chipbtn").forEach(b =>
+    b.addEventListener("click", () => {
+      inPage = b.dataset.f;
+      $("moneyin").querySelectorAll(".chipbtn").forEach(x => x.setAttribute("aria-pressed", String(x.dataset.f === inPage)));
+      paintIn();
+    }));
+  paintIn();
+}
+
+/* per group: promised (estimates left out) minus what that group has already received, never below zero */
+function groupLeft(promised, received){
+  const want = promised.filter(r => !r.is_estimate).reduce((s, r) => s + Number(r.amount || 0), 0);
+  const got = received.reduce((s, t) => s + Number(t.amount || 0), 0);
+  return Math.max(0, want - got);
+}
+function promisedLeft(promised, received){
+  const ids = new Set(promised.map(r => r.group_id));
+  let sum = 0;
+  for (const id of ids) sum += groupLeft(promised.filter(r => r.group_id === id), received.filter(t => t.group_id === id));
+  return sum;
+}
+
+/* a gift in another currency shows its own amount with the home-currency value underneath */
+const isForeign = (t) => t.currency && t.currency !== HOME_CURRENCY && t.amount_original != null;
+function inAmount(t){
+  if (!isForeign(t)) return "+" + money(t.amount);
+  return "+" + esc(foreign(t.amount_original, t.currency)) +
+    '<span class="vr" style="display:block;text-align:right">(' + money(t.amount) + ')</span>';
+}
+
+function paintIn(){
+  const {received, promised} = inData;
+  const gifts = received.filter(t => t.category === "Gift");
+
+  if (inPage === "gifts") {
+    const total = gifts.reduce((s, t) => s + Number(t.amount || 0), 0);
+    const away = gifts.filter(isForeign);
+    const codes = [...new Set(away.map(t => t.currency))];
+    const awayHome = away.reduce((s, t) => s + Number(t.amount || 0), 0);
+    /* one other currency shows in its own money; several show only their home-currency value */
+    const awayBig = codes.length === 1
+      ? foreign(away.reduce((s, t) => s + Number(t.amount_original || 0), 0), codes[0])
+      : money(awayHome);
+    $("inlist").innerHTML = gifts.length
+      /* gifts in another currency on the left, home-currency gifts on the right, everything in home currency below */
+      ? '<div class="tiles two" style="max-width:none">' +
+          (away.length
+            ? '<div class="fact"><span class="v good" style="white-space:nowrap;font-size:clamp(1rem,4.6vw,1.35rem)">' + esc(awayBig) + '</span>' +
+              (codes.length === 1 ? '<span class="gmeta" style="margin:0 0 2px">(' + money(awayHome) + ')</span>' : "") +
+              '<span class="k">' + esc(codes.length === 1 ? codes[0] : "Other currency") + ' gifts</span></div>'
+            : '<div class="fact"><span class="v good">' + gifts.length + '</span><span class="k">Gifts</span></div>') +
+          '<div class="fact" style="align-items:flex-end;text-align:right"><span class="v good">+' + money(total - awayHome) + '</span>' +
+            '<span class="k">' + HOME_CURRENCY + ' gifts</span></div>' +
+          '<div class="fact wide"><span class="v good">+' + money(total) + '</span>' +
+            '<span class="k">Total in ' + HOME_CURRENCY + ' · ' + gifts.length + (gifts.length === 1 ? " gift" : " gifts") + '</span></div>' +
+        '</div>' +
+        '<div class="vendorlist" style="margin-top:14px">' + gifts.map(t =>
+          '<div class="vrow"><div><span class="vn">' + esc(t.label) + '</span>' +
+          '<span class="vr" style="display:block">' + [t.date_label !== "—" ? t.date_label : "", t.gift_via, t.gift_side].filter(Boolean).map(esc).join(" · ") + '</span></div>' +
+          '<span class="lamt" style="text-align:right">' + inAmount(t) + '</span></div>'
+        ).join("") + '</div>'
+      : '<div class="skel">No gifts yet</div>';
+    return;
+  }
+
+  const rec = inPage === "all" ? received : inPage === "payments" ? received.filter(t => t.category !== "Gift") : [];
+  const pro = inPage === "all" || inPage === "promised" ? promised : [];
+  const ids = new Set([...rec, ...pro].map(x => x.group_id));
+  const groups = txGroups.filter(g => ids.has(g.id));
+
+  const pillRec = '<span class="pill ok">received</span>';
+  const pillPro = (r) => r.is_estimate ? '<span class="pill quiet">estimate</span>' : '<span class="pill soon">promised</span>';
+
+  $("inlist").innerHTML = groups.length ? '<div class="tx">' + groups.map(g => {
+    const r = rec.filter(t => t.group_id === g.id).sort((a, b) => (a.due_date || "9999").localeCompare(b.due_date || "9999") || a.id - b.id);
+    const p = pro.filter(x => x.group_id === g.id);
+    /* what is still to come is measured against everything the group has received, whatever page is showing */
+    const left = groupLeft(promised.filter(x => x.group_id === g.id), received.filter(t => t.group_id === g.id));
+    const got = r.reduce((s, t) => s + Number(t.amount || 0), 0);
+    const est = p.filter(x => x.is_estimate).reduce((s, x) => s + Number(x.amount || 0), 0);
+    const showGot = r.length > 0;
+    const meta = [
+      r.length ? r.length + " received" : "",
+      p.length && left ? money(left) + " still promised" : "",
+      p.length && !left && p.some(x => !x.is_estimate) ? "promises met" : "",
+      est ? money(est) + " estimated" : ""
+    ].filter(Boolean).join(" · ");
+    const lines =
+      r.map(t => '<li class="line"><span class="lname">' + esc(t.label) + '</span>' +
+        '<span class="lright"><span class="lamt">' + inAmount(t) + '</span>' + pillRec + '</span>' +
+        (() => { const sub = [t.date_label !== "—" ? t.date_label : "", t.gift_via, t.gift_side, t.details].filter(Boolean).map(esc).join(" · "); return sub ? '<span class="lsub">' + sub + '</span>' : ""; })() +
+        '</li>').join("") +
+      p.map(x => '<li class="line"><span class="lname">' + esc(x.label) + '</span>' +
+        '<span class="lright"><span class="lamt" style="color:var(--ink-3)">' + money(x.amount) + '</span>' + pillPro(x) + '</span>' +
+        '<span class="lsub">' + [x.vendor, x.date_label, x.details].filter(Boolean).map(esc).concat(["not counted"]).join(" · ") + '</span>' +
+        '</li>').join("");
+    return '<details class="grp" data-g="' + g.id + '"' + (openIn.has(g.id) ? " open" : "") + '><summary>' +
+      '<div class="ghead"><span class="caret"></span>' +
+        '<span><span class="gname">' + esc(g.name) + '</span>' + (meta ? '<span class="gmeta">' + meta + '</span>' : "") + '</span>' +
+        '<span class="gright"><span class="gamt">' + (showGot ? "+" + money(got) : money(left)) + '</span>' +
+          (showGot ? pillRec : '<span class="pill soon">promised</span>') + '</span>' +
+      '</div></summary>' +
+      '<div class="gbody">' + (g.details ? '<p class="gdetails">' + esc(g.details) + '</p>' : "") +
+      '<ul class="lines">' + lines + '</ul></div></details>';
+  }).join("") + '</div>'
+  : '<div class="skel">Nothing here yet</div>';
+
+  $("inlist").querySelectorAll("details.grp").forEach(el =>
+    el.addEventListener("toggle", () => {
+      const id = Number(el.dataset.g);
+      if (el.open) openIn.add(id); else openIn.delete(id);
+    }));
+}
+
+/* Family Tab: what one relative has promised (money_promised) against what they have actually given (received rows), both in their group.
+   Nothing here is counted anywhere else; covered vendors read their cost from Money Out instead of repeating it. */
+function renderFamily(d){
+  /* settings.family_tab names the Money In group to follow, e.g. "Parents"; without it the section hides */
+  const who = (d.settings || {}).family_tab;
+  $("family").closest("section").hidden = !who;
+  if (!who) return;
+  $("familyTitle").textContent = who + " Tab";
+  const g = (d.tx_groups || []).find(x => x.name === who);
+  const items = g ? (d.money_promised || []).filter(r => r.group_id === g.id) : [];
+  const paidRows = g ? (d.transactions || []).filter(t => t.status === "received" && t.group_id === g.id)
+    .sort((a, b) => (a.due_date || "9999").localeCompare(b.due_date || "9999") || a.id - b.id) : [];
+  const sum = (list) => list.reduce((s, r) => s + Number(r.amount || 0), 0);
+  const tab = sum(items.filter(r => !r.is_estimate));
+  const paid = sum(paidRows);
+  const left = Math.max(0, tab - paid);
+  const est = items.filter(r => r.is_estimate);
+  const tile = (k, v, cls) => '<div class="fact"><span class="v ' + (cls || "") + '">' + v + '</span><span class="k">' + k + '</span></div>';
+  const row = (label, sub, amt, tag) =>
+    '<div class="vrow"><div><span class="vn">' + esc(label) + '</span>' +
+    (sub ? '<span class="vr" style="display:block">' + sub + '</span>' : "") + '</div>' +
+    '<span class="lamt" style="text-align:right">' + amt + (tag ? '<span class="vr" style="display:block">' + tag + '</span>' : "") + '</span></div>';
+
+  $("family").innerHTML = items.length || paidRows.length
+    ? '<div class="tiles three">' +
+        tile("On the tab", money(tab)) +
+        tile(esc(who) + " paid", money(paid), "good") +
+        tile("Still to pay", money(left), left > 0 ? "warn" : "good") +
+      '</div>' +
+      (est.length ? '<p class="summary">Plus ' + money(sum(est)) + ' estimated (' + est.map(r => esc(r.label)).join(", ") + '), not counted.</p>' : "") +
+      '<p class="eyebrow" style="margin-top:22px;margin-bottom:8px">Items</p>' +
+      '<div class="vendorlist" style="margin-top:0">' + items.map(r =>
+        row(r.label,
+            [r.vendor, r.date_label, r.covers_group_id ? "from Money Out" : "", r.details].filter(Boolean).map(esc).join(" · "),
+            money(r.amount), r.is_estimate ? "estimate · not counted" : "")
+      ).join("") + '</div>' +
+      (paidRows.length
+        ? '<p class="eyebrow" style="margin-top:22px;margin-bottom:8px">Paid by ' + esc(who) + '</p>' +
+          '<div class="vendorlist" style="margin-top:0">' + paidRows.map(t =>
+            row("Payment", esc(t.date_label !== "—" ? t.date_label : ""), "+" + money(t.amount), "")
+          ).join("") + '</div>'
+        : "")
+    : '<div class="skel">Nothing on the tab</div>';
+}
+
+let allTx = [];
+let txGroups = [];
+let filter = "due";
+const inFilter = (t, f) => f === "all" || t.status === f;
+const openGroups = new Set();
+
+/* Money Out: paid and due only; received rows live in Money In */
+function renderChecklist(d){
+  allTx = (d.transactions || []).filter(t => t.status !== "received");
+  txGroups = d.tx_groups || [];
+  const groupCount = (st) => new Set(allTx.filter(t => inFilter(t, st)).map(t => t.group_id)).size;
+  const btn = (key, label) => '<button class="chipbtn" data-f="' + key + '" aria-pressed="' + (filter === key) + '">' + label + '</button>';
+
+  $("checklist").innerHTML =
+    '<div class="filters">' +
+      btn("all", "All · " + groupCount("all")) +
+      btn("due", "Due · " + groupCount("due")) +
+      btn("paid", "Paid · " + groupCount("paid")) +
+    '</div>' +
+    '<div class="tx" id="txlist"></div>';
+
+  $("checklist").querySelectorAll(".chipbtn").forEach(b =>
+    b.addEventListener("click", () => {
+      filter = b.dataset.f;
+      $("checklist").querySelectorAll(".chipbtn").forEach(x => x.setAttribute("aria-pressed", String(x.dataset.f === filter)));
+      paintTx();
+    }));
+  paintTx();
+}
+
+/* one row per group; the arrow opens the group's details and an indented list of its payments */
+function paintTx(){
+  const today = new Date(); today.setHours(0,0,0,0);
+  const dayDiff = (iso) => iso ? Math.round((new Date(iso + "T00:00:00") - today) / 86400000) : null;
+  const isLate = (t) => { const dd = dayDiff(t.due_date); return t.status === "due" && dd !== null && dd < 0; };
+  const stateOf = (t) => t.status === "paid" || t.status === "received" ? t.status : isLate(t) ? "late" : "due";
+  const sign = (st) => st === "received" ? "+" : "";
+  const pill = (st) => st === "paid" || st === "received" ? '<span class="pill ok">' + st + '</span>'
+                     : st === "late" ? '<span class="pill late">overdue</span>'
+                     : '<span class="pill due">due</span>';
+  const whenText = (t) => {
+    const dd = dayDiff(t.due_date);
+    let s = t.date_label && t.date_label !== "—" ? esc(t.date_label) : "";
+    if (t.status === "due" && dd !== null) s += (s ? " · " : "") + (dd < 0 ? Math.abs(dd) + "d overdue" : "in " + dd + "d");
+    return s;
+  };
+  const sizeOf = {};
+  for (const t of allTx) sizeOf[t.group_id] = (sizeOf[t.group_id] || 0) + 1;
+
+  const byGroup = new Map();
+  for (const t of allTx.filter(t => inFilter(t, filter))) {
+    if (!byGroup.has(t.group_id)) byGroup.set(t.group_id, []);
+    byGroup.get(t.group_id).push(t);
+  }
+
+  const rank = {late: 0, due: 1, received: 2, paid: 3};
+  const groups = txGroups.filter(g => byGroup.has(g.id)).map(g => {
+    const lines = byGroup.get(g.id).slice().sort((a, b) =>
+      (a.part_num || 99) - (b.part_num || 99) ||
+      (a.due_date || "9999").localeCompare(b.due_date || "9999") ||
+      a.id - b.id);
+    const states = lines.map(stateOf);
+    const st = states.includes("late") ? "late" : states.includes("due") ? "due" : states.every(s => s === "received") ? "received" : "paid";
+    const total = lines.filter(t => !t.refundable).reduce((sum, t) => sum + Number(t.amount || 0), 0);
+    const next = lines.filter(t => t.status === "due" && t.due_date).sort((a, b) => a.due_date.localeCompare(b.due_date))[0] || null;
+    return {g, lines, st, total, next, mixed: new Set(lines.map(t => t.status)).size > 1};
+  }).sort((a, b) =>
+    rank[a.st] - rank[b.st] ||
+    (a.next && b.next ? a.next.due_date.localeCompare(b.next.due_date) : 0) ||
+    a.g.sort_order - b.g.sort_order);
+
+  const head = (open, x, meta) =>
+    '<div class="ghead">' +
+      '<span class="caret"' + (open ? "" : ' style="visibility:hidden"') + '></span>' +
+      '<span><span class="gname">' + esc(x.g.name) + '</span>' +
+        (meta ? '<span class="gmeta' + (x.st === "late" ? " late" : "") + '">' + meta + '</span>' : "") + '</span>' +
+      '<span class="gright"><span class="gamt">' + sign(x.st) + money(x.total) + '</span>' + pill(x.st) + '</span>' +
+    '</div>';
+
+  $("txlist").innerHTML = groups.map(x => {
+    const single = sizeOf[x.g.id] === 1 && x.st !== "received";
+    if (single) {
+      const t = x.lines[0];
+      const text = x.g.details || t.details;
+      const meta = whenText(t);
+      return text
+        ? '<details class="grp" data-g="' + x.g.id + '"' + (openGroups.has(x.g.id) ? " open" : "") + '><summary>' + head(true, x, meta) + '</summary>' +
+          '<div class="gbody"><p class="gdetails">' + esc(text) + '</p></div></details>'
+        : '<div class="grp">' + head(false, x, meta) + '</div>';
+    }
+    const noun = x.lines[0].category === "Gift" ? " gift" : " payment";
+    const meta = x.lines.length + noun + (x.lines.length === 1 ? "" : "s") +
+      (x.next ? " · next " + whenText(x.next) : "");
+    const list = x.lines.map(t => {
+      const when = whenText(t);
+      const sub = [when, t.refundable ? "refundable · not in total" : ""].filter(Boolean).join(" · ");
+      return '<li class="line">' +
+        '<span class="lname">' + esc(t.label) + (t.part_total ? ' <span class="part">(' + t.part_num + "/" + t.part_total + ")</span>" : "") + '</span>' +
+        '<span class="lright"><span class="lamt">' + sign(t.status) + money(t.amount) + '</span>' + (x.mixed ? pill(stateOf(t)) : "") + '</span>' +
+        (sub ? '<span class="lsub' + (isLate(t) ? " late" : "") + '">' + sub + '</span>' : "") +
+        (t.details ? '<span class="lsub">' + esc(t.details) + '</span>' : "") +
+        '</li>';
+    }).join("");
+    return '<details class="grp" data-g="' + x.g.id + '"' + (openGroups.has(x.g.id) ? " open" : "") + '><summary>' + head(true, x, meta) + '</summary>' +
+      '<div class="gbody">' + (x.g.details ? '<p class="gdetails">' + esc(x.g.details) + '</p>' : "") +
+      '<ul class="lines">' + list + '</ul></div></details>';
+  }).join("") || '<div class="ghead"><span></span><span class="gmeta">Nothing in this list</span><span></span></div>';
+
+  $("txlist").querySelectorAll("details.grp").forEach(el =>
+    el.addEventListener("toggle", () => {
+      const id = Number(el.dataset.g);
+      if (el.open) openGroups.add(id); else openGroups.delete(id);
+    }));
+}
+
+
+if (!DEMO && !window.supabase) {
+  document.body.innerHTML = '<div class="signin"><h1>Wedding Tracker</h1><p class="hint">The page could not load. Check your connection and reload.</p></div>';
+  throw new Error("supabase-js did not load");
+}
+
+const sb = DEMO ? null : window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+  auth: {persistSession: true, autoRefreshToken: true, detectSessionInUrl: false}
+});
+
+/* Every read and write goes through here: the database's functions, or in demo
+   mode the same answers from demo-data.json, with ticks and notes kept in memory. */
+let demoData = null;
+async function call(name, args){
+  if (!DEMO) return sb.rpc(name, args);
+  if (!demoData) demoData = await fetch("demo-data.json").then(r => r.json());
+  if (name === "tracker_data") return {data: demoDerive(JSON.parse(JSON.stringify(demoData))), error: null};
+  if (name === "set_checklist_item") {
+    const c = demoData.checklist.find(x => x.id === args.item_id);
+    if (c) c.done = args.is_done;
+    return {data: {id: args.item_id, done: args.is_done}, error: null};
+  }
+  if (name === "add_unsorted_note") {
+    const n = {id: Date.now(), body: args.note, created_at: new Date().toISOString()};
+    demoData.unsorted_notes = (demoData.unsorted_notes || []).concat(n);
+    return {data: n, error: null};
+  }
+  return {data: null, error: {message: "unknown call " + name}};
+}
+
+/* the totals tracker_data() works out in the database, worked out here from the demo rows */
+function demoDerive(d){
+  const tx = d.transactions || [], sum = (l) => l.reduce((s, t) => s + Number(t.amount || 0), 0);
+  const is = (st, refundable) => (t) => t.status === st && (refundable == null || !!t.refundable === refundable);
+  d.money = {
+    paid: sum(tx.filter(is("paid"))), due: sum(tx.filter(is("due", false))),
+    refundable_due: sum(tx.filter(is("due", true))),
+    committed: sum(tx.filter(t => (t.status === "paid" || t.status === "due") && !t.refundable)),
+    received: sum(tx.filter(is("received")))
+  };
+  const att = (d.guests || []).filter(g => g.attending);
+  const people = att.filter(g => !g.is_pet);
+  d.lodging = (d.beds || []).slice().sort((a, b) => a.sort_order - b.sort_order).map(b => {
+    const in_ = att.filter(g => g.bed_id === b.id).sort((x, y) => x.is_pet - y.is_pet || x.name.localeCompare(y.name));
+    return {id: b.id, cabin: b.cabin, bed_type: b.bed_type, sort_order: b.sort_order,
+            people: in_.filter(g => !g.is_pet).length, bodies: in_.length, names: in_.map(g => g.name).join(", ")};
+  });
+  d.lodging_summary = {
+    bed_count: (d.beds || []).length,
+    beds_used: new Set(att.filter(g => g.bed_id).map(g => g.bed_id)).size,
+    guests_attending: people.length,
+    parties_attending: new Set(people.map(g => g.party)).size,
+    guests_placed: people.filter(g => g.bed_id).length,
+    rsvped: people.filter(g => g.rsvp === "yes").length,
+    dinner_count: people.filter(g => g.eats_dinner !== false).length +
+      (d.vendors || []).filter(v => v.eats_dinner).reduce((s, v) => s + v.headcount, 0),
+    payers: people.filter(g => g.pays).length
+  };
+  (d.money_promised || []).forEach(p => {
+    if (p.amount == null && p.covers_group_id)
+      p.amount = sum(tx.filter(t => t.group_id === p.covers_group_id && (t.status === "paid" || t.status === "due") && !t.refundable));
+  });
+  return d;
+}
+
+function showSignin(msg){
+  $("app").hidden = true;
+  $("signin").hidden = false;
+  $("signinMsg").textContent = msg || "";
+}
+function showApp(){
+  $("signin").hidden = true;
+  $("app").hidden = false;
+}
+
+function showError(text){
+  const bar = $("err");
+  bar.textContent = text;
+  bar.hidden = false;
+  $("stamp").textContent = "not loaded";
+  for (const id of ["numbers","lodging","checklist","moneyin","family","timeline","notes"]) {
+    const el = $(id);
+    if (el.querySelector(".skel")) el.innerHTML = '<div class="skel">No data</div>';
+  }
+}
+
+function weddingDate(iso){
+  if (!iso) return "";
+  return new Date(iso + "T12:00:00").toLocaleDateString("en-US", {month:"long", day:"numeric", year:"numeric"});
+}
+
+let loading = false;
+async function load(){
+  if (loading) return;
+  loading = true;
+  $("stamp").textContent = "reading…";
+  try {
+    const {data: d, error} = await call("tracker_data");
+    if (error) {
+      if (!DEMO && (error.code === "42501" || /jwt|not signed in/i.test(error.message || ""))) {
+        await sb.auth.signOut();
+        showSignin("Your session ended. Sign in again.");
+        return;
+      }
+      throw error;
+    }
+    if (!d || !d.lodging) throw new Error("empty");
+    $("err").hidden = true;
+    const s = d.settings || {};
+    $("eyebrow").textContent = [s.venue, weddingDate(s.wedding_date)].filter(Boolean).join(" · ");
+    const title = s.site_title || "Wedding Tracker";
+    document.querySelectorAll(".sitetitle").forEach(h => { h.textContent = title; });
+    document.title = title;
+    renderNumbers(d);
+    renderLodging(d);
+    renderChecklist(d);
+    renderMoneyIn(d);
+    renderFamily(d);
+    $("timeline").innerHTML = (d.page_text || {}).timeline || "";
+    $("notes").innerHTML = (d.page_text || {}).notes || "";
+    fillCalcs(d);
+    unsortedNotes = (d.unsorted_notes || []).reverse();
+    renderUnsorted();
+    checklist = d.checklist || [];
+    renderChecklists();
+    updateBadge();
+    $("stamp").textContent = new Date().toLocaleTimeString([], {hour:"numeric", minute:"2-digit"});
+  } catch (e) {
+    showError("Could not reach the wedding database. Close and reopen the page. If it keeps failing, the Supabase project may be paused — restore it from the Supabase dashboard.");
+  } finally {
+    loading = false;
+  }
+}
+
+$("signinForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  $("signinBtn").disabled = true;
+  $("signinMsg").textContent = "";
+  const {error} = await sb.auth.signInWithPassword({email: $("email").value.trim(), password: $("password").value});
+  $("signinBtn").disabled = false;
+  if (error) {
+    $("signinMsg").textContent = error.status === 400 ? "That email and password don't match." : "Could not sign in: " + error.message;
+    return;
+  }
+  $("password").value = "";
+  showApp();
+  load();
+});
+
+$("signout").addEventListener("click", async () => {
+  await sb.auth.signOut();
+  if ("clearAppBadge" in navigator) navigator.clearAppBadge().catch(() => {});
+  showSignin("");
+});
+
+$("noteForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const note = $("noteInput").value.trim();
+  if (!note) return;
+  $("noteBtn").disabled = true;
+  $("noteMsg").hidden = true;
+  const {data, error} = await call("add_unsorted_note", {note});
+  $("noteBtn").disabled = false;
+  if (error) {
+    $("noteMsg").textContent = "Could not save that note. Try again.";
+    $("noteMsg").hidden = false;
+    return;
+  }
+  $("noteInput").value = "";
+  unsortedNotes.unshift(data);
+  renderUnsorted();
+  updateBadge();
+});
+
+/* reopening the saved home-screen app pulls fresh numbers */
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden && !$("app").hidden) load();
+});
+
+/* tabs: always open on Costs; switching from further down jumps back to the top of the content */
+function showTab(name){
+  document.querySelectorAll(".panel").forEach(p => { p.hidden = p.dataset.tab !== name; });
+  document.querySelectorAll(".tab").forEach(b => b.setAttribute("aria-selected", String(b.dataset.tab === name)));
+  const mh = document.querySelector(".masthead");
+  const top = mh.offsetTop + mh.offsetHeight;
+  if (window.scrollY > top) window.scrollTo({top});
+}
+document.querySelectorAll(".tab").forEach(b => b.addEventListener("click", () => showTab(b.dataset.tab)));
+
+(async () => {
+  if (DEMO) {
+    $("demobar").hidden = false;
+    $("signout").hidden = true;
+    showApp();
+    load();
+    return;
+  }
+  const {data: {session}} = await sb.auth.getSession();
+  if (session) { showApp(); load(); } else { showSignin(""); }
+})();
+</script>
+</body>
+</html>
