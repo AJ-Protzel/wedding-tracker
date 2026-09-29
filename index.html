@@ -1139,10 +1139,16 @@ function showTab(name){
   if (window.scrollY > top) window.scrollTo({top});
 }
 document.querySelectorAll(".tab").forEach(b => b.addEventListener("click", () => showTab(b.dataset.tab)));
+/* a link can open a tab directly: #guests, #timeline, #notes */
+if (document.querySelector('.tab[data-tab="' + location.hash.slice(1) + '"]')) {
+  showTab(location.hash.slice(1));
+  /* the hash also names an element, which the browser scrolls to; start at the top instead */
+  addEventListener("load", () => setTimeout(() => window.scrollTo(0, 0), 0));
+}
 
 (async () => {
   if (DEMO) {
-    $("demobar").hidden = false;
+    $("demobar").hidden = /[?&]shot\b/.test(location.search);
     $("signout").hidden = true;
     showApp();
     load();
